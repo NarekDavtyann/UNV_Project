@@ -76,6 +76,8 @@ def checking_newly_created_DOA_availability():
     # Submitting to UNV
     create_new_doa.submit_doa_to_UNV(driver=driver_instance)
 
+    # Checking doa_availability
+    assert True == create_new_doa.checking_created_doa_by_doa_title(driver=driver_instance)
 
     driver_instance.quit()
 

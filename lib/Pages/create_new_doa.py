@@ -1,6 +1,7 @@
 from selenium.webdriver.common.by import By
 
 from lib.Helpers.helpers import wait_element_to_be_clickable, mylogger, random_file_name, random_numbers
+from lib.Pages.doa_details_manager_page import doa_title_text
 
 # X-path
 create_new_doa_button_locator = (By.XPATH, "//button[@data-testId='topbar-msal-newDoa']")
@@ -143,6 +144,7 @@ def click_on_the_expertise_is_required_drpodown(driver):
     wait_element_to_be_clickable(driver, *assignment_expertise_required_dropdown_button)
     driver.find_element(*assignment_expertise_required_dropdown_button).click()
 
+
 def _return_expertise_dropdown_option(option_name):
     return (By.XPATH,
             f"//div[@class='p-dropdown-panel p-hidden p-input-overlay p-input-overlay-visible']"
@@ -164,6 +166,7 @@ def click_on_assignment_continue(driver):
 def click_on_complete_button_in_confirmation_pop_up(driver):
     wait_element_to_be_clickable(driver, *confirm_doa_creation_button)
     driver.find_element(*confirm_doa_creation_button).click()
+
 
 def completing_mandatory_fields_for_online_doa(driver, task_type, hours_week, country, sustainable_goal):
     inserting_doa_title_field(driver=driver)
@@ -195,3 +198,15 @@ def submit_doa_to_UNV(driver):
     mylogger('Doa is created and submitted to UNV')
     driver.find_element(*doa_submit_button).click()
     click_on_complete_button_in_confirmation_pop_up(driver)
+
+
+def checking_created_doa_by_doa_title(driver):
+    inserted_title = inserting_doa_title_field
+    created_doa_title_text = doa_title_text(driver)
+
+    if inserted_title == created_doa_title_text:
+        mylogger("Doa is created successfully")
+        return True
+    else:
+        return False
+
