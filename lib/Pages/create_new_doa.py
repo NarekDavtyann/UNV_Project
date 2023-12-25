@@ -1,7 +1,7 @@
 from selenium.webdriver.common.by import By
 
 from lib.Helpers.helpers import wait_element_to_be_clickable, mylogger, random_file_name, random_numbers
-from lib.Pages.doa_details_manager_page import doa_title_text
+
 
 # X-path
 create_new_doa_button_locator = (By.XPATH, "//button[@data-testId='topbar-msal-newDoa']")
@@ -57,7 +57,7 @@ def return_doa_type_condition(driver, doa_type):
         return False
 
 
-def inserting_doa_title_field(driver):
+def set_and_return_doa_title_field(driver):
     wait_element_to_be_clickable(driver, *doa_title_locator)
     mylogger("Completing the 'Doa title' field")
     doa_title = random_file_name()
@@ -65,7 +65,7 @@ def inserting_doa_title_field(driver):
     return doa_title
 
 
-def inserting_task_description_field(driver):
+def set_and_return_task_description_field(driver):
     wait_element_to_be_clickable(driver, *task_description_locator)
     mylogger("Completing 'Task description' field")
     task_description = random_file_name()
@@ -73,7 +73,7 @@ def inserting_task_description_field(driver):
     return task_description
 
 
-def inserting_duration_in_weeks_field(driver):
+def set_and_return_duration_in_weeks_field(driver):
     wait_element_to_be_clickable(driver, *duration_locator)
     mylogger("Completing 'Duration' field")
     duration = random_numbers()
@@ -81,7 +81,7 @@ def inserting_duration_in_weeks_field(driver):
     return duration
 
 
-def inserting_assignment_context_field(driver):
+def set_and_return_assignment_context_field(driver):
     wait_element_to_be_clickable(driver, *assignment_context_locator)
     mylogger("Completing 'Assignment context' field")
     assignment_context = random_file_name()
@@ -89,7 +89,7 @@ def inserting_assignment_context_field(driver):
     return assignment_context
 
 
-def inserting_number_of_assignments_field(driver):
+def set_and_return_number_of_assignments_field(driver):
     wait_element_to_be_clickable(driver, *assignment_context_locator)
     mylogger("Completing 'Number of assignments' field")
     assignment_numbers = random_numbers()
@@ -97,7 +97,7 @@ def inserting_number_of_assignments_field(driver):
     return assignment_numbers
 
 
-def inserting_required_skills_fields(driver):
+def set_and_return_required_skills_fields(driver):
     wait_element_to_be_clickable(driver, *required_skills_locator)
     mylogger("Completing 'Required skills' field")
     required_skills = random_file_name()
@@ -169,12 +169,12 @@ def click_on_complete_button_in_confirmation_pop_up(driver):
 
 
 def completing_mandatory_fields_for_online_doa(driver, task_type, hours_week, country, sustainable_goal):
-    inserting_doa_title_field(driver=driver)
-    inserting_task_description_field(driver=driver)
-    inserting_duration_in_weeks_field(driver=driver)
-    inserting_assignment_context_field(driver=driver)
-    inserting_number_of_assignments_field(driver=driver)
-    inserting_required_skills_fields(driver=driver)
+    doa_title = set_and_return_doa_title_field(driver=driver)
+    doa_task_desc = set_and_return_task_description_field(driver=driver)
+    doa_duration = set_and_return_duration_in_weeks_field(driver=driver)
+    set_and_return_assignment_context_field(driver=driver)
+    doa_assignment_number = set_and_return_number_of_assignments_field(driver=driver)
+    set_and_return_required_skills_fields(driver=driver)
     clicking_on_task_type_dropdown(driver=driver)
     click_on_dropdown_option_by_name(driver=driver, option_name=task_type)
     clicking_on_hours_per_week_dropdown(driver=driver)
@@ -184,6 +184,8 @@ def completing_mandatory_fields_for_online_doa(driver, task_type, hours_week, co
     clicking_on_sustainable_development_goal_dropdown(driver=driver)
     click_on_dropdown_option_by_name(driver=driver, option_name=sustainable_goal)
     mylogger('All required fields are completed')
+
+    return [doa_title, doa_task_desc, doa_duration, doa_assignment_number]
 
 
 def completing_Doa_assignment(driver, option_name):
@@ -200,13 +202,10 @@ def submit_doa_to_UNV(driver):
     click_on_complete_button_in_confirmation_pop_up(driver)
 
 
-def checking_created_doa_by_doa_title(driver):
-    inserted_title = inserting_doa_title_field
-    created_doa_title_text = doa_title_text(driver)
+def return_iserted_data_value(driver):
+    doa_title = set_and_return_doa_title_field(driver)
+    doa_task_desc = set_and_return_task_description_field(driver)
+    doa_duration = set_and_return_duration_in_weeks_field(driver)
+    doa_number_of_assignments = set_and_return_number_of_assignments_field(driver)
 
-    if inserted_title == created_doa_title_text:
-        mylogger("Doa is created successfully")
-        return True
-    else:
-        return False
-
+    return [doa_title, doa_task_desc, doa_duration, doa_number_of_assignments]

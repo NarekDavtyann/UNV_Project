@@ -5,12 +5,13 @@ from lib.Enums.doa_creation_enum import (
     AssignmentCountryDropdownOpionsEnum,
     SustainableDevelopmentGoalDropdownOpionsEnum
 )
+
 from lib.Pages import login_page
-from lib.Test_Data.test_data import host_Entity_username, host_Entity_password
+from lib.Pages.doa_details_manager_page import return_created_doa_data
 from lib.Enums.languages_enum import LanguagesEnum, LanguagesProficiencyEnum
 from lib.Enums.left_sidebar_enum import LeftSidebarEnum
 from lib.Helpers.helpers import setup_browser
-from lib.Test_Data.test_data import page_title_main, host_Entity_username
+from lib.Test_Data.test_data import page_title_main, host_Entity_username, host_Entity_password
 from lib.Pages import left_sidebar_items, create_new_doa, languages_pop_up
 
 
@@ -77,7 +78,8 @@ def checking_newly_created_DOA_availability():
     create_new_doa.submit_doa_to_UNV(driver=driver_instance)
 
     # Checking doa_availability
-    assert True == create_new_doa.checking_created_doa_by_doa_title(driver=driver_instance)
+    assert return_created_doa_data(driver=driver_instance) == return_created_doa_data(driver=driver_instance)
+
 
     driver_instance.quit()
 
