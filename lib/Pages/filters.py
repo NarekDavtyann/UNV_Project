@@ -1,6 +1,5 @@
-import logging
+from lib.Pages import tables
 from selenium.webdriver.common.by import By
-
 from lib.Enums.filters_enum import FiltersEnum
 from lib.Helpers.helpers import wait_element_to_be_clickable, mylogger
 
@@ -98,3 +97,14 @@ def clicking_hide_filter(driver):
     driver.find_element(*hide_filter_button).click()
 
 
+def filtering_the_DOA_table_by_online(driver):
+    clicking_on_the_filter_button(driver)
+    checkign_DoA_Type_condition(driver)
+    selecting_online_filter(driver)
+    checkign_DoA_Type_condition(driver)
+    clicking_apply_filter(driver)
+    clicking_hide_filter(driver)
+    assert True == tables.checking_online_data_availability(
+        driver,
+        text_online=FiltersEnum.Online.value
+    )

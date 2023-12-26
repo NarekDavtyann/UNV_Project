@@ -56,6 +56,6 @@ def checking_online_data_availability(driver, text_online):
         if element.text != text_online:
             mylogger("Filter is incorrect")
             return False
-    mylogger("Onsite Doas are only shown")
+    mylogger("Online Doas are only shown")
     return True
 

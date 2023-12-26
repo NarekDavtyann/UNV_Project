@@ -24,7 +24,7 @@ def checking_filters_functionality():
     # Navigating to DoAs page
     left_sidebar_items.click_left_sidebar_items_by_text(
         driver=driver_instance,
-        text=LeftSidebarEnum.DoAs.sidebar_element_text
+        text=LeftSidebarEnum.DoAs.text
     )
 
     # Checking which table view is selected
@@ -40,16 +40,7 @@ def checking_filters_functionality():
     assert True == filters.comparing_filtered_headers_list_with_displayed_headers(driver=driver_instance)
 
     # Filtering the table
-    filters.clicking_on_the_filter_button(driver=driver_instance)
-    filters.checkign_DoA_Type_condition(driver=driver_instance)
-    filters.selecting_online_filter(driver=driver_instance)
-    filters.checkign_DoA_Type_condition(driver=driver_instance)
-    filters.clicking_apply_filter(driver=driver_instance)
-    filters.clicking_hide_filter(driver=driver_instance)
-    assert True == tables.checking_online_data_availability(
-        driver=driver_instance,
-        text_online=FiltersEnum.Online.value
-    )
+    filters.filtering_the_DOA_table_by_online(driver=driver_instance)
 
     driver_instance.quit()
 
