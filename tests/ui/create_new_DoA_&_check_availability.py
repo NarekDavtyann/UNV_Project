@@ -53,7 +53,7 @@ def checking_newly_created_DOA_availability():
     )
 
     # Completing required fields
-    create_new_doa.completing_mandatory_fields_for_online_doa(
+    expected_doa_data = create_new_doa.set_and_return_mandatory_fields_for_online_doa(
         driver=driver_instance,
         task_type=TaskTypeDropdownOptionsEnum.Administration.value,
         hours_week=HourPerWeekDropdownOptionsEnum.Option_1_5.value,
@@ -78,7 +78,7 @@ def checking_newly_created_DOA_availability():
     create_new_doa.submit_doa_to_UNV(driver=driver_instance)
 
     # Checking doa_availability
-    assert return_created_doa_data(driver=driver_instance) == return_created_doa_data(driver=driver_instance)
+    assert expected_doa_data == return_created_doa_data(driver=driver_instance)
 
 
     driver_instance.quit()

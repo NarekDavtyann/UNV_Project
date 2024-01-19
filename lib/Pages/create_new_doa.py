@@ -168,7 +168,7 @@ def click_on_complete_button_in_confirmation_pop_up(driver):
     driver.find_element(*confirm_doa_creation_button).click()
 
 
-def completing_mandatory_fields_for_online_doa(driver, task_type, hours_week, country, sustainable_goal):
+def set_and_return_mandatory_fields_for_online_doa(driver, task_type, hours_week, country, sustainable_goal):
     doa_title = set_and_return_doa_title_field(driver=driver)
     doa_task_desc = set_and_return_task_description_field(driver=driver)
     doa_duration = set_and_return_duration_in_weeks_field(driver=driver)
@@ -183,7 +183,7 @@ def completing_mandatory_fields_for_online_doa(driver, task_type, hours_week, co
     click_on_dropdown_option_by_name(driver=driver, option_name=country)
     clicking_on_sustainable_development_goal_dropdown(driver=driver)
     click_on_dropdown_option_by_name(driver=driver, option_name=sustainable_goal)
-    mylogger('All required fields are completed')
+    mylogger(f'All required fields are completed and return {doa_title, doa_task_desc, doa_duration, doa_assignment_number} ')
 
     return [doa_title, doa_task_desc, doa_duration, doa_assignment_number]
 

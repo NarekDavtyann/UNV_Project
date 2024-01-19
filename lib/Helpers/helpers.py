@@ -34,7 +34,7 @@ def wait_element_to_be_clickable(driver, by, value):
 
 def random_numbers():
     random_number = random.randint(1, 1)
-    return random_number
+    return str(random_number)
 
 
 def random_file_name():

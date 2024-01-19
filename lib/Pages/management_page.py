@@ -39,7 +39,7 @@ def click_on_each_element(driver):
     current_url = driver.current_url
     for each_item in sections_label:
         if len(sections_label) == 10:
-            mylogger(f"Navigating to the {each_item} pa")
+            mylogger(f"Navigating to the {each_item} page")
             wait_element_to_be_clickable(driver, *_return_section_element(each_item))
             driver.find_element(*_return_section_element(each_item)).click()
             driver.get(current_url)

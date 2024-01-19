@@ -10,7 +10,7 @@ created_doa_duration = (
 
 created_doa_number_of_assignments = (
     By.XPATH,
-    "//div[@class='two-column'][1]/div[@class='section__column'][2]/div[@class='section_item'][4]"
+    "//div[@class='two-column'][1]/div[@class='section__column'][2]/div[@class='section_item'][4]/p"
 )
 
 def _return_doa_title_text(driver):
@@ -20,8 +20,8 @@ def _return_doa_title_text(driver):
 
 
 def _return_doa_task_description(driver):
-    wait_element_to_be_clickable(driver, *created_doa_title)
-    doa_task_description = driver.find_element(*created_doa_title).text
+    wait_element_to_be_clickable(driver, *created_doa_task_description)
+    doa_task_description = driver.find_element(*created_doa_task_description).text
     return doa_task_description
 
 

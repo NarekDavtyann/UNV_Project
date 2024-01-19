@@ -19,10 +19,6 @@ def return_sidebar_element_condition(driver, name):
     else:
         return False
 
-
-
-
-
 def click_left_sidebar_items_by_text(driver, text):
     wait_element_to_be_clickable(driver, *sidebar_elements_xpath)
     elements = driver.find_elements(*sidebar_elements_xpath)
